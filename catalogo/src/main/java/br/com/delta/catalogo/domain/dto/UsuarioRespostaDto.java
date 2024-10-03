@@ -1,6 +1,9 @@
 package br.com.delta.catalogo.domain.dto;
 
+import br.com.delta.catalogo.domain.model.Endereco;
 import br.com.delta.catalogo.domain.model.Usuario;
+
+import java.util.List;
 
 public record UsuarioRespostaDto(
         Long id,
@@ -10,7 +13,8 @@ public record UsuarioRespostaDto(
         String nomeFantasia,
         String inscricaoEstadual,
         String inscricaoCcm,
-        String codigoContabil
+        String codigoContabil,
+        List<Endereco> enderecos
 ) {
     public UsuarioRespostaDto(Usuario usuario) {
         this(
@@ -21,7 +25,8 @@ public record UsuarioRespostaDto(
                 usuario.getNomeFantasia(),
                 usuario.getInscricaoEstadual(),
                 usuario.getInscricaoCcm(),
-                usuario.getCodigoContabil()
+                usuario.getCodigoContabil(),
+                usuario.getEnderecos()
         );
     }
 }

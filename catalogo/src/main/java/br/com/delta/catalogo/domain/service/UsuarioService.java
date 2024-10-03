@@ -13,13 +13,16 @@ public class UsuarioService {
     @Autowired
     UsuarioRepository repository;
 
-    public UsuarioRespostaDto buscarUsuarioPorId(Long id){
+    @Autowired
+    EnderecoService enderecoService;
+
+    public UsuarioRespostaDto buscarUsuarioPorId(Long id) {
         return new UsuarioRespostaDto(repository.findById(id).orElseThrow());
     }
 
-    public UsuarioRespostaDto cadastrarUsuario(CriarUsuarioDto criarUsuarioDto){
-         Usuario usuario = repository.save(new Usuario(criarUsuarioDto));
+    public UsuarioRespostaDto cadastrarUsuario(CriarUsuarioDto criarUsuarioDto) {
+        Usuario usuario = repository.save(new Usuario(criarUsuarioDto));
+        enderecoService.cadastrar(criarUsuarioDto.endereco(), usuario);
         return new UsuarioRespostaDto(usuario);
-
     }
 }

@@ -2,8 +2,11 @@ package br.com.delta.catalogo.domain.model;
 
 import br.com.delta.catalogo.domain.dto.CriarUsuarioDto;
 import br.com.delta.catalogo.domain.enumerated.UsuarioTipo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "tb_usuario")
@@ -34,6 +37,10 @@ public class Usuario {
     @Column(name = "tipo")
     private UsuarioTipo usuarioTipo;
 
+    @OneToMany(mappedBy = "usuario")
+    @JsonIgnore
+    private List<Endereco> enderecos;
+
     public Usuario(CriarUsuarioDto dto) {
         this.email = dto.email();
         this.cnpj = dto.cnpj();
@@ -45,7 +52,6 @@ public class Usuario {
         this.senha = dto.senha();
         this.usuarioTipo = UsuarioTipo.COMUN;
     }
-
 
     @Override
     public String toString() {
