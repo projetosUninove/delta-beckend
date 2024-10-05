@@ -17,7 +17,7 @@ public class UsuarioService {
     EnderecoService enderecoService;
 
     public UsuarioRespostaDto buscarUsuarioPorId(Long id) {
-        return new UsuarioRespostaDto(repository.findById(id).orElseThrow());
+        return new UsuarioRespostaDto(repository.findById(id).orElseThrow(UsuarioNaoEncontradoException::new));
     }
 
     public UsuarioRespostaDto cadastrarUsuario(CriarUsuarioDto criarUsuarioDto) {
