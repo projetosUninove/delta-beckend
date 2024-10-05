@@ -38,4 +38,5 @@ public class Contato {
         this.usuario = usuario;
         return this;
     }
+
 }

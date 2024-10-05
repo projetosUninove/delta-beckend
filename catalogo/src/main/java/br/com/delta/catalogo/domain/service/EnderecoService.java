@@ -50,4 +50,5 @@ public class EnderecoService {
     private boolean verificarUsuarioPossuiEnderecoEntregaEFaturamento(Long usuarioId) {
         return repository.usuarioPossuiEnderecoEntregaEFaturamento(usuarioId);
     }
+
 }

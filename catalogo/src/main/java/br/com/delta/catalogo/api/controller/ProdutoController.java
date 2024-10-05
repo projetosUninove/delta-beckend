@@ -2,6 +2,7 @@ package br.com.delta.catalogo.api.controller;
 
 import br.com.delta.catalogo.domain.model.Produto;
 import br.com.delta.catalogo.domain.service.ProdutoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,7 @@ public class ProdutoController {
 
     //    TODO -> Busca paginada
     @GetMapping
-    public ResponseEntity<List<Produto>> buscarProduto(){
+    public ResponseEntity<List<Produto>> buscarProduto() {
         return ResponseEntity.ok(service.buscarProduto());
     }
 
@@ -33,7 +34,7 @@ public class ProdutoController {
     }
 
     @PostMapping
-    public ResponseEntity<Produto> cadastrar(@RequestBody Produto produto, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<Produto> cadastrar(@RequestBody @Valid Produto produto, UriComponentsBuilder uriBuilder) {
         Produto resposta = service.cadastrar(produto);
         URI uri = uriBuilder.path("/usuario/{id}").buildAndExpand(resposta.getId()).toUri();
         return ResponseEntity.created(uri).body(resposta);

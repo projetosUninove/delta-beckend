@@ -19,12 +19,12 @@ public class UsuarioController {
     private UsuarioService service;
 
     @GetMapping("/{id}")
-    public ResponseEntity buscarUsuario(@PathVariable Long id){
-      return ResponseEntity.ok(service.buscarUsuarioPorId(id));
+    public ResponseEntity buscarUsuario(@PathVariable Long id) {
+        return ResponseEntity.ok(service.buscarUsuarioPorId(id));
     }
 
     @PostMapping
-    public ResponseEntity cadastrarUsuario(@RequestBody @Valid CriarUsuarioDto usuario, UriComponentsBuilder uriBuilder){
+    public ResponseEntity cadastrarUsuario(@RequestBody @Valid CriarUsuarioDto usuario, UriComponentsBuilder uriBuilder) {
         UsuarioRespostaDto usuarioResposta = service.cadastrarUsuario(usuario);
         URI uri = uriBuilder.path("/usuario/{id}").buildAndExpand(usuarioResposta.id()).toUri();
         return ResponseEntity.created(uri).body(usuarioResposta);

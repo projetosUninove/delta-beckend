@@ -21,4 +21,5 @@ public class ContatoService {
     public void cadastrar(List<Contato> contatos, Usuario usuario) {
         contatos.forEach(contato -> repository.save(contato.setUsuario(usuario)));
     }
+
 }

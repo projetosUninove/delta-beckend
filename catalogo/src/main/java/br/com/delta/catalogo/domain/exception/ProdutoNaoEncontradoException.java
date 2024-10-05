@@ -1,8 +1,8 @@
 package br.com.delta.catalogo.domain.exception;
 
-public class ProdutoNaoEncontradoException extends RuntimeException{
+public class ProdutoNaoEncontradoException extends RuntimeException {
 
-    public ProdutoNaoEncontradoException(){
+    public ProdutoNaoEncontradoException() {
         super("Produto não encontrado!");
     }
 }

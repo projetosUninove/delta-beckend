@@ -24,7 +24,7 @@ public class UsuarioService {
     }
 
     public UsuarioRespostaDto buscarUsuarioPorId(Long id) {
-        return new UsuarioRespostaDto(repository.findById(id).orElseThrow(UsuarioNaoEncontradoException::new));
+        return new UsuarioRespostaDto(findUsuarioId(id));
     }
 
     @Transactional
@@ -34,4 +34,12 @@ public class UsuarioService {
         contatoService.cadastrar(criarUsuarioDto.contatos(), usuario);
         return new UsuarioRespostaDto(usuario);
     }
+
+    // TODO -> Criar metodo de compra subitraindo quantidade do estoque e limpando carrinho
+    // TODO -> Metodo de limpar carrinho
+
+    public Usuario findUsuarioId(Long id) {
+        return repository.findById(id).orElseThrow(UsuarioNaoEncontradoException::new);
+    }
+
 }

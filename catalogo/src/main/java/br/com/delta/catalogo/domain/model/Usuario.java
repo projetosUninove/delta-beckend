@@ -57,18 +57,4 @@ public class Usuario {
         this.usuarioTipo = UsuarioTipo.COMUN;
     }
 
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", cnpj='" + cnpj + '\'' +
-                ", razaoSocial='" + razaoSocial + '\'' +
-                ", nomeFantasia='" + nomeFantasia + '\'' +
-                ", inscricaoEstadual='" + inscricaoEstadual + '\'' +
-                ", inscricaoCcm='" + inscricaoCcm + '\'' +
-                ", codigoContabil='" + codigoContabil + '\'' +
-                ", senha='" + senha + '\'' +
-                '}';
-    }
 }
