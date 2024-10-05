@@ -33,13 +33,17 @@ public class Usuario {
     private String codigoContabil;
     private String senha;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "tipo")
+    @Enumerated(EnumType.STRING)
     private UsuarioTipo usuarioTipo;
 
-    @OneToMany(mappedBy = "usuario")
     @JsonIgnore
+    @OneToMany(mappedBy = "usuario")
     private List<Endereco> enderecos;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuario")
+    private List<Contato> contatos;
 
     public Usuario(CriarUsuarioDto dto) {
         this.email = dto.email();

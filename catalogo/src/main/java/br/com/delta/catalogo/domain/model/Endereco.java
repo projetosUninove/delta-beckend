@@ -31,8 +31,8 @@ public class Endereco {
     private TipoEndereco tipoEndereco;
 
     @ManyToOne
-    @JoinColumn(name = "id_usuario")
     @JsonIgnore
+    @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
     public Endereco setUsuario(Usuario usuario) {

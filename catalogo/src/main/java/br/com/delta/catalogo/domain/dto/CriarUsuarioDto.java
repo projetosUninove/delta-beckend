@@ -1,5 +1,6 @@
 package br.com.delta.catalogo.domain.dto;
 
+import br.com.delta.catalogo.domain.model.Contato;
 import br.com.delta.catalogo.domain.model.Endereco;
 import br.com.delta.catalogo.domain.model.Usuario;
 import jakarta.validation.constraints.Email;
@@ -26,7 +27,8 @@ public record CriarUsuarioDto(
         String inscricaoEstadual,
         String inscricaoCcm,
         String codigoContabil,
-        List<Endereco> endereco,
+        List<Endereco> enderecos,
+        List<Contato> contatos,
 
         @NotNull
         String senha
@@ -41,6 +43,7 @@ public record CriarUsuarioDto(
                 usuario.getInscricaoCcm(),
                 usuario.getCodigoContabil(),
                 usuario.getEnderecos(),
+                usuario.getContatos(),
                 usuario.getSenha()
         );
     }

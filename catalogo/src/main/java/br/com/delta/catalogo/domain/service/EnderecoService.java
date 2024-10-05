@@ -12,8 +12,12 @@ import java.util.List;
 @Service
 public class EnderecoService {
 
+    private final EnderecoRepository repository;
+
     @Autowired
-    private EnderecoRepository repository;
+    public EnderecoService(EnderecoRepository repository) {
+        this.repository = repository;
+    }
 
     public void cadastrar(List<Endereco> enderecos, Usuario usuario) {
         validarEnderecos(enderecos);
@@ -43,7 +47,7 @@ public class EnderecoService {
         }
     }
 
-    public boolean verificarUsuarioPossuiEnderecoEntregaEFaturamento(Long usuarioId) {
+    private boolean verificarUsuarioPossuiEnderecoEntregaEFaturamento(Long usuarioId) {
         return repository.usuarioPossuiEnderecoEntregaEFaturamento(usuarioId);
     }
 }

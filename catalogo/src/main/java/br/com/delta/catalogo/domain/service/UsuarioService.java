@@ -12,11 +12,16 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UsuarioService {
 
-    @Autowired
-    UsuarioRepository repository;
+    private final UsuarioRepository repository;
+    private final EnderecoService enderecoService;
+    private final ContatoService contatoService;
 
     @Autowired
-    EnderecoService enderecoService;
+    public UsuarioService(UsuarioRepository repository, EnderecoService enderecoService, ContatoService contatoService) {
+        this.repository = repository;
+        this.enderecoService = enderecoService;
+        this.contatoService = contatoService;
+    }
 
     public UsuarioRespostaDto buscarUsuarioPorId(Long id) {
         return new UsuarioRespostaDto(repository.findById(id).orElseThrow(UsuarioNaoEncontradoException::new));
@@ -25,7 +30,8 @@ public class UsuarioService {
     @Transactional
     public UsuarioRespostaDto cadastrarUsuario(CriarUsuarioDto criarUsuarioDto) {
         Usuario usuario = repository.save(new Usuario(criarUsuarioDto));
-        enderecoService.cadastrar(criarUsuarioDto.endereco(), usuario);
+        enderecoService.cadastrar(criarUsuarioDto.enderecos(), usuario);
+        contatoService.cadastrar(criarUsuarioDto.contatos(), usuario);
         return new UsuarioRespostaDto(usuario);
     }
 }
