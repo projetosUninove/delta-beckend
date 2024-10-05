@@ -1,4 +1,4 @@
-package br.com.delta.catalogo.domain.service;
+package br.com.delta.catalogo.domain.exception;
 
 public class UsuarioNaoEncontradoException extends RuntimeException {
 
