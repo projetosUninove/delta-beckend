@@ -31,6 +31,10 @@ public class CarrinhoService {
     }
 
     public Carrinho adicionar(CarrinhoDto dto) {
+        System.out.println(repository.existsByUsuarioIdAndProdutoId(dto.usuarioId(), dto.usuarioId()));
+        if (repository.existsByUsuarioIdAndProdutoId(dto.usuarioId(), dto.produtoId())){
+            throw new RuntimeException("Produto já esta no carrinho");
+        }
         return repository.save(novoCarrinho(dto));
     }
 
@@ -40,9 +44,6 @@ public class CarrinhoService {
         return carrinho.atualizar(novoCarrinho(dto));
     }
 
-    public void deletar(Long id) {
-        repository.delete(buscarPorId(id));
-    }
 
     private Carrinho novoCarrinho(CarrinhoDto dto) {
         Usuario usuario = usuarioService.findUsuarioId(dto.usuarioId());
@@ -50,8 +51,29 @@ public class CarrinhoService {
         return new Carrinho(dto.quantidade(), usuario, produto);
     }
 
+    @Transactional
+    public List<Carrinho> comparar(Long id) {
+        List<Carrinho> carrinhos =  repository.findByUsuarioId(id);
+
+        carrinhos.forEach(carrinho -> {
+            produtoService.comprar(carrinho.getProduto(), carrinho.getQuantidade());
+        });
+
+        this.limparCarrinhoPorUsuario(id);
+        return repository.findByUsuarioId(id);
+    }
+
     private Carrinho buscarPorId(Long id) {
         return repository.findById(id).orElseThrow(CarrinhoNaoEncontrado::new);
+    }
+
+    public void deletar(Long id) {
+        repository.delete(buscarPorId(id));
+    }
+
+    @Transactional
+    public void limparCarrinhoPorUsuario(Long id){
+        repository.deleteByUsuarioId(id);
     }
 
 }

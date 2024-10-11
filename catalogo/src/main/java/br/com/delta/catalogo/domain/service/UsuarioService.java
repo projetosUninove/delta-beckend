@@ -35,9 +35,6 @@ public class UsuarioService {
         return new UsuarioRespostaDto(usuario);
     }
 
-    // TODO -> Criar metodo de compra subitraindo quantidade do estoque e limpando carrinho
-    // TODO -> Metodo de limpar carrinho
-
     public Usuario findUsuarioId(Long id) {
         return repository.findById(id).orElseThrow(UsuarioNaoEncontradoException::new);
     }

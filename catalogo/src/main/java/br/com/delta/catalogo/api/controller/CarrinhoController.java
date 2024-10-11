@@ -35,6 +35,13 @@ public class CarrinhoController {
         return ResponseEntity.created(uri).body(resposta);
     }
 
+    @PostMapping("/{usuarioId}")
+    public ResponseEntity<List<Carrinho>> comprar(@PathVariable Long usuarioId){
+        System.out.println(usuarioId);
+        List<Carrinho> carrinhos = service.comparar(usuarioId);
+        return ResponseEntity.ok().body(carrinhos);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Carrinho> atualizar(@PathVariable Long id, @RequestBody @Valid CarrinhoDto dto) {
         return ResponseEntity.ok(service.atualizar(id, dto));
@@ -45,4 +52,11 @@ public class CarrinhoController {
         service.deletar(id);
         return ResponseEntity.noContent().build();
     }
+
+    @DeleteMapping("/limpar/{id}")
+    public ResponseEntity limparCarrinhoPorUsuario(@PathVariable Long id){
+        service.limparCarrinhoPorUsuario(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

@@ -1,6 +1,7 @@
 package br.com.delta.catalogo.domain.service;
 
 import br.com.delta.catalogo.domain.exception.ProdutoNaoEncontradoException;
+import br.com.delta.catalogo.domain.exception.ProdutoQuantidadeInsuficienteException;
 import br.com.delta.catalogo.domain.model.Produto;
 import br.com.delta.catalogo.domain.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,4 +42,15 @@ public class ProdutoService {
         return repository.findById(id).orElseThrow(ProdutoNaoEncontradoException::new);
     }
 
+    @Transactional
+    public Produto comprar(Produto compra, Integer quantidade) {
+        Produto produto = findById(compra.getId());
+
+        if (produto.getQuantidade() < quantidade) {
+            throw new ProdutoQuantidadeInsuficienteException(compra);
+        }
+
+       return produto.comprar(quantidade);
+
+    }
 }

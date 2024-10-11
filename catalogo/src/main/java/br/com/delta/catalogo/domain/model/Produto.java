@@ -34,4 +34,8 @@ public class Produto {
         return this;
     }
 
+    public Produto comprar(Integer quantidade) {
+        this.quantidade -= quantidade;
+        return this;
+    }
 }
