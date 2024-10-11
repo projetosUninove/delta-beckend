@@ -1,4 +1,4 @@
-package br.com.delta.catalogo.infra;
+package br.com.delta.catalogo.infra.exception;
 
 import br.com.delta.catalogo.domain.exception.CarrinhoNaoEncontradoException;
 import br.com.delta.catalogo.domain.exception.ProdutoNaoEncontradoException;
