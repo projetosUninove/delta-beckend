@@ -1,7 +1,7 @@
 package br.com.delta.catalogo.domain.service;
 
 import br.com.delta.catalogo.domain.dto.CarrinhoDto;
-import br.com.delta.catalogo.domain.exception.CarrinhoNaoEncontrado;
+import br.com.delta.catalogo.domain.exception.CarrinhoNaoEncontradoException;
 import br.com.delta.catalogo.domain.model.Carrinho;
 import br.com.delta.catalogo.domain.model.Produto;
 import br.com.delta.catalogo.domain.model.Usuario;
@@ -31,7 +31,6 @@ public class CarrinhoService {
     }
 
     public Carrinho adicionar(CarrinhoDto dto) {
-        System.out.println(repository.existsByUsuarioIdAndProdutoId(dto.usuarioId(), dto.usuarioId()));
         if (repository.existsByUsuarioIdAndProdutoId(dto.usuarioId(), dto.produtoId())){
             throw new RuntimeException("Produto já esta no carrinho");
         }
@@ -43,7 +42,6 @@ public class CarrinhoService {
         Carrinho carrinho = buscarPorId(id);
         return carrinho.atualizar(novoCarrinho(dto));
     }
-
 
     private Carrinho novoCarrinho(CarrinhoDto dto) {
         Usuario usuario = usuarioService.findUsuarioId(dto.usuarioId());
@@ -64,7 +62,7 @@ public class CarrinhoService {
     }
 
     private Carrinho buscarPorId(Long id) {
-        return repository.findById(id).orElseThrow(CarrinhoNaoEncontrado::new);
+        return repository.findById(id).orElseThrow(CarrinhoNaoEncontradoException::new);
     }
 
     public void deletar(Long id) {
