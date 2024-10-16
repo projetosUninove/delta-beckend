@@ -24,7 +24,7 @@ public class TokenService {
                     .withIssuer("Delta API")
                     .withSubject(user.getUsername())
                     .withClaim("id", user.getId())
-                    .withClaim("name", user.getNomeFantasia())
+                    .withClaim("tipo", user.getUsuarioTipo().ordinal())
                     .withExpiresAt(expirationDate())
                     .sign(algorithm);
         } catch (JWTCreationException exception) {

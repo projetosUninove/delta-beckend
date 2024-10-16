@@ -29,7 +29,6 @@ public class AuthController {
     public ResponseEntity login(@RequestBody @Valid LoginDTO loginDTO) {
         var authenticationToken = new UsernamePasswordAuthenticationToken(loginDTO.email(), loginDTO.senha());
         var authentication = manager.authenticate(authenticationToken);
-        System.out.println(authentication);
 
         var tokenJWT = tokenService.generateToken((Usuario) authentication.getPrincipal());
 
