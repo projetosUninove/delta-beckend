@@ -50,7 +50,11 @@ public class ProdutoService {
             throw new ProdutoQuantidadeInsuficienteException(compra);
         }
 
-       return produto.comprar(quantidade);
+        return produto.comprar(quantidade);
+    }
 
+    public void deletar(Long id) {
+        Produto produto = findById(id);
+        repository.delete(produto);
     }
 }
